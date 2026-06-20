@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراجعة الفيزياء ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF5FA; --bg2:#FFEAF4; --panel:#FFFFFF; --panel2:#FFF0F7;
+  --ink:#3A2030; --muted:#9B7A8C; --line:#F4D4E6;
+  --accent:#E0518F; --accent2:#B86AD9; --accent-ink:#fff;
+  --good:#22B07D; --good-bg:#E3F8EF; --bad:#E85D75; --bad-bg:#FDEBEE; --warn:#E0A030;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);font-family:'IBM Plex Sans Arabic',sans-serif;min-height:100vh;line-height:1.8}
+.en,.num{font-family:'IBM Plex Mono',monospace;direction:ltr;unicode-bidi:embed}
+.wrap{max-width:780px;margin:0 auto;padding:20px 16px 70px}
+header.top{display:flex;align-items:center;justify-content:space-between;padding:16px 0 22px;margin-bottom:8px}
+.brand{font-weight:700;font-size:20px;display:flex;align-items:center;gap:8px}
+.brand small{display:block;color:var(--muted);font-weight:400;font-size:12px;margin-top:2px}
+.tagchip{font-size:12px;color:var(--accent2);border:1.5px solid var(--accent2);border-radius:20px;padding:4px 12px;background:#fff}
+
+.grid{display:grid;grid-template-columns:1fr;gap:13px}
+@media(min-width:560px){.grid{grid-template-columns:1fr 1fr}}
+.card{position:relative;background:var(--panel);border:1.5px solid var(--line);border-radius:18px;padding:18px;cursor:pointer;transition:transform .14s, box-shadow .14s;box-shadow:0 4px 14px rgba(224,81,143,.06)}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(224,81,143,.16);border-color:var(--accent)}
+.card .ico{font-size:24px;margin-bottom:8px}
+.card h3{font-size:16px;margin-bottom:3px}
+.card .sub{font-size:11px;color:var(--muted);font-family:'IBM Plex Mono',monospace;direction:ltr;text-align:right}
+.card .meta{margin-top:11px;font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.badge{font-size:11px;padding:2px 10px;border-radius:20px;border:1.5px solid var(--line);color:var(--muted)}
+.badge.done{border-color:var(--good);color:var(--good);background:var(--good-bg)}
+.badge.half{border-color:var(--warn);color:var(--warn);background:#FCF3E2}
+.sechead{margin:24px 0 14px;font-size:17px;color:var(--accent);font-weight:700;display:flex;align-items:center;gap:8px}
+.sechead:first-of-type{margin-top:6px}
+.intro{color:var(--muted);font-size:13px;text-align:center;margin-top:26px;padding:14px;background:#fff;border-radius:16px;border:1.5px dashed var(--line)}
+
+.backbtn{background:#fff;border:1.5px solid var(--line);color:var(--muted);border-radius:20px;padding:7px 18px;cursor:pointer;font-family:inherit;font-size:13px;margin-bottom:16px}
+.backbtn:hover{color:var(--accent);border-color:var(--accent)}
+h2.topic-title{font-size:23px;margin-bottom:3px}
+.topic-sub{color:var(--muted);font-size:13px;margin-bottom:18px}
+.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.tab{flex:1;min-width:90px;padding:11px;border-radius:14px;border:1.5px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;font-family:inherit;font-size:14px;font-weight:600}
+.tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(224,81,143,.3)}
+
+.qcount{font-size:12px;color:var(--muted);margin-bottom:10px;font-family:'IBM Plex Mono',monospace;direction:ltr;text-align:right}
+.qbox{background:var(--panel);border:1.5px solid var(--line);border-radius:18px;padding:20px;margin-bottom:14px;box-shadow:0 4px 14px rgba(224,81,143,.05)}
+.qtext{font-size:18px;font-weight:600;margin-bottom:18px;line-height:1.7}
+.opt{display:block;width:100%;text-align:right;background:var(--panel2);border:1.5px solid var(--line);color:var(--ink);border-radius:14px;padding:13px 16px;margin-bottom:9px;cursor:pointer;font-family:inherit;font-size:15px;transition:border-color .1s, background .1s}
+.opt:hover{border-color:var(--accent);background:#fff}
+.opt.correct{border-color:var(--good);background:var(--good-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt:disabled{cursor:default}
+.tfrow{display:flex;gap:10px;margin-top:4px}
+.tf{flex:1;padding:14px;border-radius:14px;border:2px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;font-size:17px;font-weight:700;color:var(--ink)}
+.tf:hover{border-color:var(--accent)}
+.tf.sel-correct{border-color:var(--good);background:var(--good-bg);color:var(--good)}
+.tf.sel-wrong{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+.tf:disabled{cursor:default}
+.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:14px;padding:12px 28px;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 4px 12px rgba(224,81,143,.3)}
+.primary:hover{filter:brightness(1.06)}
+.ghost{background:#fff;border:1.5px solid var(--line);color:var(--muted);border-radius:14px;padding:11px 22px;font-family:inherit;font-size:14px;cursor:pointer}
+.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.nextbtn{margin-top:14px}
+.fb{font-size:14px;margin-top:14px;font-weight:600}
+.fb.good{color:var(--good)} .fb.bad{color:var(--bad)}
+.scorebox{text-align:center;padding:34px 16px}
+.scorebox .big{font-size:48px;font-weight:700;font-family:'IBM Plex Mono',monospace;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.actions.center{justify-content:center}
+
+/* write / reveal */
+.hint{font-size:13px;color:var(--muted);margin-bottom:14px;background:var(--panel2);border:1.5px dashed var(--line);border-radius:14px;padding:11px 15px}
+.revealcard{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:18px;margin-bottom:12px;box-shadow:0 4px 14px rgba(224,81,143,.05)}
+.revealcard .q{font-weight:600;font-size:16px;margin-bottom:6px}
+.reveal-ans{margin-top:10px;padding:13px 15px;background:var(--good-bg);border:1.5px solid var(--good);border-radius:12px;font-size:15px;line-height:1.7;display:none}
+.reveal-ans.show{display:block}
+.revealbtn{margin-top:8px;background:var(--panel2);border:1.5px solid var(--line);color:var(--accent);border-radius:12px;padding:8px 16px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.revealbtn:hover{background:#fff;border-color:var(--accent)}
+.selfrow{margin-top:10px;display:none;gap:8px}
+.selfrow.show{display:flex}
+.selfrow button{flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600}
+.selfrow .yes{color:var(--good);border-color:var(--good)} .selfrow .yes:hover{background:var(--good-bg)}
+.selfrow .no{color:var(--bad);border-color:var(--bad)} .selfrow .no:hover{background:var(--bad-bg)}
+.selfrow button.picked{opacity:.5}
+
+/* calc problem */
+.problem{font-size:16px;line-height:1.9;background:var(--panel2);border:1.5px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.problem b{color:var(--accent)}
+.lawbox{font-size:13px;color:var(--accent2);background:#F7ECFB;border:1.5px solid #ECD6F5;border-radius:12px;padding:10px 14px;margin-bottom:14px;text-align:center}
+.answerrow{display:flex;gap:10px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.answerrow label{font-size:15px;font-weight:600}
+.answerrow input{flex:1;min-width:120px;background:#fff;border:2px solid var(--line);border-radius:12px;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:16px;padding:11px 14px;direction:ltr;text-align:left}
+.answerrow input:focus{outline:none;border-color:var(--accent)}
+.answerrow .unit{color:var(--muted);font-size:14px;font-family:'IBM Plex Mono',monospace}
+.solution{margin-top:14px;padding:14px 16px;border-radius:12px;font-size:15px;line-height:1.9;display:none}
+.solution.ok{background:var(--good-bg);border:1.5px solid var(--good)}
+.solution.no{background:var(--bad-bg);border:1.5px solid var(--bad)}
+.solution.show{display:block}
+.solution .step{font-family:'IBM Plex Mono',monospace;direction:ltr;text-align:left;font-size:14px;color:var(--ink);background:#fff;border-radius:8px;padding:8px 10px;margin-top:8px}
+.summary{margin:16px 0;padding:16px;border-radius:16px;background:#fff;border:1.5px solid var(--line);font-size:16px;font-weight:700;text-align:center}
+.summary .num{color:var(--accent)}
+.star{color:var(--accent2)}
+
+/* matching game */
+.matchwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mCol{display:flex;flex-direction:column;gap:9px}
+.mItem{position:relative;text-align:right;background:var(--panel2);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;font-family:inherit;font-size:14px;color:var(--ink);line-height:1.6;transition:border-color .1s, background .1s;min-height:54px;display:flex;align-items:center;gap:8px}
+.mLeft{font-weight:600;justify-content:flex-start}
+.mItem:hover{border-color:var(--accent);background:#fff}
+.mSel{border-color:var(--accent2);background:#F7ECFB;box-shadow:0 0 0 3px rgba(184,106,217,.18)}
+.mPaired{border-color:var(--accent);background:#fff}
+.mOk{border-color:var(--good)!important;background:var(--good-bg)!important}
+.mNo{border-color:var(--bad)!important;background:var(--bad-bg)!important}
+.mItem:disabled{cursor:default}
+.mNum{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;border-radius:50%;background:var(--accent2);color:#fff;font-size:12px;font-family:'IBM Plex Mono',monospace;flex-shrink:0}
+.mTag{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-family:'IBM Plex Mono',monospace;flex-shrink:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="brand">✨ مراجعة الفيزياء<small>الوحدات ١ – ٦</small></div>
+  <div class="tagchip">مذاكرة 💜</div>
+</header>
+<div id="app"></div>
+</div>
+
+<script>
+/* ============ DEFINITIONS (تعريفات) ============ */
+const DEFS=[
+ {t:'الفيزياء', d:'فرع من فروع العلم يُعنى بدراسة العالم الطبيعي مثل الطاقة والمادة وكيفية ارتباطهما', kw:['طبيعي','طاقة','ماده','ماد']},
+ {t:'علاقة الفيزياء بالرياضيات', d:'يستخدم علماء الفيزياء الرياضيات بوصفها لغة قادرة على التعبير عن القوانين والظواهر الفيزيائية بشكل واضح ومفهوم', kw:['لغه','لغة','قوانين','تعبير']},
+ {t:'الطريقة العلمية', d:'أسلوب للإجابة عن تساؤلات علمية بهدف تفسير الظواهر الطبيعية المختلفة', kw:['اسلوب','تساؤل','ظواهر','تفسير']},
+ {t:'الفرضية', d:'تخمين علمي عن كيفية ارتباط المتغيرات مع بعضها البعض، ولاختبار صحتها تُصمَّم التجارب العلمية وتُنفَّذ', kw:['تخمين','متغير','تجارب','تجرب']},
+ {t:'القانون العلمي', d:'قاعدة طبيعية تجمع مشاهدات مترابطة لوصف ظاهرة طبيعية متكررة', kw:['قاعده','مشاهد','ظاهره','متكرر']},
+ {t:'دقة القياس', d:'درجة الإتقان في القياس، وتعتمد على الأداة والطريقة المستخدمة؛ وكلما كانت الأداة ذات تدريج بقيم أصغر كانت القياسات أكثر دقة', kw:['اتقان','اداه','تدريج']},
+ {t:'القياس', d:'مقارنة كمية مجهولة بأخرى معيارية', kw:['مقارن','مجهول','معيار']},
+ {t:'الضبط', d:'اتفاق نتائج القياس مع القيمة المقبولة في القياس', kw:['اتفاق','مقبول','قيمه']},
+ {t:'المخطط التوضيحي للحركة', d:'ترتيب الصور المتتابعة وجمعها في صورة واحدة تُظهر مواقع جسم متحرك في فترات زمنية متساوية', kw:['صور','متتابع','مواقع','متساو']},
+ {t:'الجسيم النقطي', d:'تمثيل حركة العداء بسلسلة متتابعة من النقاط المفردة', kw:['نقاط','عداء','مفرد','تمثيل']},
+ {t:'السقوط الحر', d:'حركة جسم تحت تأثير الجاذبية الأرضية فقط وإهمال تأثير مقاومة الهواء', kw:['جاذبيه','مقاومه','هواء','اهمال']},
+ {t:'القوة', d:'سحب أو دفع يؤثر في جسم ما', kw:['سحب','دفع']},
+ {t:'قوة التلامس', d:'تتولد عندما يلامس جسم من المحيط الخارجي النظام (مثل حمل كتاب بيدك)', kw:['تولد','يلامس','محيط','كتاب']},
+ {t:'قوة المجال', d:'تؤثر في الأجسام بغض النظر عن وجود تلامس أو عدمه، مثل القوى المغناطيسية', kw:['مغناطيس','تلامس','بغض']},
+ {t:'قوة الشد', d:'القوة التي يؤثر بها خيط أو حبل، وللتبسيط نفترض أن كتل الحبال والخيوط مهملة', kw:['خيط','حبل','مهمل']},
+ {t:'القوة المعيقة', d:'قوة الممانعة التي يؤثر بها مائع في جسم يتحرك خلاله، وتزداد بزيادة سرعة الجسم وتعتمد على شكله وحجمه ولزوجة المائع ودرجة حرارته', kw:['ممانع','مائع','لزوج','سرعه']},
+ {t:'القوة المحصلة', d:'مجموع المتجهات لجميع القوى التي تؤثر في جسم', kw:['مجموع','متجه','قوى']},
+ {t:'القصور الذاتي', d:'ممانعة الجسم لأي تغيّر في حالته من حيث السكون أو الحركة، ويسمى قانون نيوتن الأول أحياناً قانون القصور', kw:['ممانع','سكون','نيوتن','تغير']},
+ {t:'القوة المركزية', d:'محصلة القوة التي تؤثر في اتجاه مركز الدائرة وتسبب التسارع المركزي للجسم', kw:['مركز','دائر','تسارع']},
+ {t:'السرعة الحدية', d:'السرعة المنتظمة التي يصل إليها الجسم عندما تتساوى القوة المعيقة مع قوة الجاذبية الأرضية', kw:['منتظم','معيق','جاذبيه','تساوى','تساو']},
+ {t:'الاتزان', d:'يكون الجسم في حالة اتزان إذا كان ساكناً أو متحركاً بسرعة منتظمة', kw:['ساكن','منتظم','متحرك']},
+ {t:'القوة العمودية', d:'قوة تلامس يؤثر بها سطح في جسم آخر، وتكون دائماً عمودية على مستوى التلامس بين الجسمين', kw:['تلامس','عمودي','سطح']},
+ {t:'قوة الاحتكاك', d:'قوة تلامس تؤثر في اتجاه معاكس للحركة الانزلاقية بين السطوح', kw:['معاكس','انزلاق','سطوح']},
+ {t:'الاحتكاك الحركي', d:'قوة تنشأ بين سطحين متلامسين عند انزلاق أحدهما على الآخر', kw:['انزلاق','سطحين','تنشأ']},
+ {t:'الاحتكاك السكوني', d:'قوة تنشأ بين سطحين متلامسين بالرغم من عدم انزلاق أي منهما على الآخر', kw:['عدم','انزلاق','سطحين']},
+ {t:'القوة الموازنة', d:'تساوي القوة المحصلة في المقدار ولكن تعاكسها في الاتجاه، وهي التي تجعل الجسم متزناً', kw:['تساوي','تعاكس','متزن']},
+ {t:'المدى الأفقي للمقذوف', d:'المسافة الأفقية التي يقطعها المقذوف خلال زمن تحليقه', kw:['افقي','مسافه','مقذوف']},
+ {t:'زمن التحليق', d:'الزمن الكلي الذي يبقى فيه المقذوف في الهواء من لحظة قذفه حتى وصوله الأرض', kw:['زمن','هواء','مقذوف']},
+ {t:'التسارع المركزي', d:'التسارع المتجه نحو مركز الدائرة في الحركة الدائرية المنتظمة', kw:['مركز','دائر','متجه']},
+];
+
+/* ============ TRUE / FALSE (صح / خطأ) ============ */
+const TF=[
+ {s:'إذا كان تسارع السيارة يساوي صفراً فهذا يعني أنها تسير بسرعة ثابتة', a:true},
+ {s:'يكون للجسم تسارع موجب عندما يكون اتجاه متجه التسارع في الاتجاه الموجب', a:true},
+ {s:'يكون للجسم تسارع سالب عندما يكون اتجاه متجه التسارع في الاتجاه الموجب', a:false},
+ {s:'يكون للجسم تسارع سالب عندما يكون اتجاه متجه التسارع في الاتجاه السالب', a:true},
+ {s:'كلما كانت أداة القياس ذات تدريج بقيم أصغر، كانت القياسات أكثر دقة', a:true},
+ {s:'ذكر غاليليو أن سرعة سقوط الأجسام تعتمد على زمن سقوطها وليس كتلتها', a:true},
+ {s:'للحصول على نتائج دقيقة يجب أن نقرأ التدريجات بالنظر بشكل عمودي بعين واحدة', a:true},
+ {s:'من أنواع الحركة الدائرية غير المنتظمة حركة الطواف حول الكعبة', a:true},
+ {s:'يُستخدم تحليل الوحدات للتحقق من صحة الحل فقط', a:false, why:'تحليل الوحدات لا يكفي وحده للتحقق من صحة الحل'},
+ {s:'القانون العلمي يفسّر سبب حدوث الظواهر المختلفة', a:false, why:'القانون يصف الظاهرة، أما النظرية فهي التي تفسّر السبب'},
+ {s:'الزمن كمية عددية (قياسية)', a:true},
+ {s:'من أمثلة الكميات المشتقة: التسارع', a:true},
+ {s:'من أنواع الحركة الاهتزازية حركة الأرجوحة', a:true},
+ {s:'نظام ساهر يقيس السرعة المتجهة اللحظية', a:true},
+ {s:'10⁶ متر = ميغامتر', a:true},
+ {s:'عندما تتغير سرعة الجسم بمعدل منتظم فإن له تسارعاً منتظماً', a:true},
+ {s:'المساحة تحت منحنى (السرعة المتجهة – الزمن) تمثل التغير في الإزاحة', a:true},
+ {s:'القوى المحصلة لقوتين متساويتين في اتجاهين متعاكسين تساوي صفراً', a:true},
+ {s:'سقوط الأجسام الخفيفة ذات السطوح الكبيرة يكون للقوة المعيقة تأثير ملحوظ في حركتها', a:true},
+ {s:'العلاقة بين القوة والتسارع علاقة خطية', a:true},
+ {s:'اندفاع الراكب إلى الأمام عند توقف السيارة فجأة سببه القصور الذاتي', a:true},
+ {s:'إذا كان كتاب الفيزياء متزناً فإن القوة المحصلة المؤثرة فيه تساوي صفراً', a:true},
+ {s:'إذا وقفتِ على ميزان داخل مصعد يتسارع نحو الأسفل، تكون قراءة الميزان أقل من وزنك', a:true},
+ {s:'العلاقة بين تردد موجات الضوء وطولها الموجي علاقة عكسية', a:true},
+ {s:'عندما يرتفع الجسم المقذوف للأعلى فإن سرعته تتناقص', a:true},
+ {s:'للقوة الموازنة نفس مقدار القوة المحصلة ولكن تعاكسها في الاتجاه', a:true},
+];
+
+/* ============ REASONING (علّلي) ============ */
+const WHY=[
+ {q:'علّلي: لا بد أن تكون القوى المحصلة باتجاه مركز الدائرة في الحركة الدائرية', a:'لأن تسارع الجسم الذي يتحرك في مسار دائري يكون دائماً في اتجاه المركز'},
+ {q:'علّلي: متجه التسارع في الحركة الدائرية المنتظمة يشير دائماً لمركز الدائرة', a:'لأنه يتجه دائماً حول مركز الدائرة (التسارع المركزي نحو المركز)'},
+ {q:'علّلي: وجود نتوءات صغيرة على سطح كرة الجولف', a:'لأنها تؤدي إلى تقليل مقاومة الهواء وزيادة المدى الأفقي للكرة'},
+ {q:'لماذا يتم تحليل المتجهات إلى مركباتها؟', a:'لأن ذلك يُسهّل عملية جمع المتجهات حسابياً'},
+ {q:'الشعور لدى الكثيرين بوجود قوة تدفع الراكب للخارج عند المنعطف — ماذا تسمى؟', a:'تسمى قوة الطرد المركزي، وهي قوة وهمية'},
+ {q:'فيمَ يُستخدم السقوط الحر؟', a:'في تصميم الألعاب في مدينة الألعاب (الملاهي)'},
+ {q:'ماذا تمثل المساحة تحت منحنى (السرعة المتجهة – الزمن)؟', a:'تمثل التغير في الإزاحة'},
+ {q:'لاحظ صياد تراجع أبيه للخلف عند إطلاق الرصاص — ما سبب ذلك؟', a:'قوة رد الفعل الناتجة عن إطلاق الرصاص (قانون نيوتن الثالث)'},
+ {q:'علّلي: اندفاع الراكب إلى الأمام عند توقف السيارة فجأة', a:'بسبب القصور الذاتي للجسم (ممانعته لتغيّر حالته الحركية)'},
+];
+
+/* ============ MATCHING (مزاوجة القوى) ============ */
+const MATCH=[
+ {left:'قوة التلامس', right:'تتولد عند ملامسة جسم خارجي للنظام (كحمل كتاب بيدك)'},
+ {left:'قوة المجال', right:'تؤثر في الأجسام بدون تلامس، مثل القوى المغناطيسية'},
+ {left:'قوة الشد', right:'القوة التي يؤثر بها خيط أو حبل'},
+ {left:'القوة المعيقة', right:'ممانعة يؤثر بها مائع في جسم يتحرك خلاله'},
+ {left:'القوة العمودية', right:'قوة تلامس عمودية دائماً على سطح التلامس'},
+ {left:'قوة الاحتكاك', right:'تؤثر في اتجاه معاكس للحركة الانزلاقية'},
+ {left:'القوة المركزية', right:'محصلة قوة تؤثر نحو مركز الدائرة وتسبب التسارع المركزي'},
+ {left:'القوة المحصلة', right:'مجموع المتجهات لجميع القوى المؤثرة في جسم'},
+ {left:'القوة الموازنة', right:'تساوي المحصلة في المقدار وتعاكسها في الاتجاه فتجعل الجسم متزناً'},
+];
+function rint(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+function r1(a,b){return Math.round((Math.random()*(b-a)+a)*10)/10}
+const G=9.8;
+
+const CALC=[
+ {
+  id:'freefall_dist',
+  law:'المسافة في السقوط الحر:  d = ½ · g · t²   (حيث g = 9.8 m/s²)',
+  gen(){ const t=rint(3,9); const d=Math.round(0.5*G*t*t*10)/10;
+    return {vars:{t}, ans:d, unit:'m',
+     text:`سقط جسم من أعلى برج مملكة سقوطاً حراً. ما المسافة التي سيقطعها بعد مرور <b>${t}</b> ثوانٍ؟`,
+     steps:[`d = ½ × g × t²`,`d = ½ × 9.8 × (${t})²`,`d = ½ × 9.8 × ${t*t}`,`d = ${d} m`]};
+  }
+ },
+ {
+  id:'accel_time',
+  law:'التسارع:  a = Δv ⁄ t   ⟹   t = Δv ⁄ a',
+  gen(){ const a=rint(3,6); const v=a*rint(4,9); const t=Math.round(v/a*10)/10;
+    return {vars:{v,a}, ans:t, unit:'s',
+     text:`تسارعت سيارة من السكون بمقدار منتظم <b>${a}</b> m/s². فما الزمن اللازم لتصل سرعتها إلى <b>${v}</b> m/s؟`,
+     steps:[`t = Δv ⁄ a`,`t = ${v} ⁄ ${a}`,`t = ${t} s`]};
+  }
+ },
+ {
+  id:'weight',
+  law:'الوزن:  W = m · g   (حيث g = 9.8 m/s²)',
+  gen(){ const m=rint(2,9); const w=Math.round(m*G*10)/10;
+    return {vars:{m}, ans:w, unit:'N',
+     text:`ما وزن جسم كتلته <b>${m}</b> كيلوجرام؟`,
+     steps:[`W = m × g`,`W = ${m} × 9.8`,`W = ${w} N`]};
+  }
+ },
+ {
+  id:'newton2_F',
+  law:'قانون نيوتن الثاني:  F = m · a',
+  gen(){ const m=rint(2,10); const a=rint(2,8); const f=m*a;
+    return {vars:{m,a}, ans:f, unit:'N',
+     text:`جسم كتلته <b>${m}</b> kg يتحرك بتسارع <b>${a}</b> m/s². ما مقدار القوة المحصلة المؤثرة فيه؟`,
+     steps:[`F = m × a`,`F = ${m} × ${a}`,`F = ${f} N`]};
+  }
+ },
+ {
+  id:'newton2_a',
+  law:'قانون نيوتن الثاني:  a = F ⁄ m',
+  gen(){ const m=rint(2,8); const a=rint(2,7); const f=m*a;
+    return {vars:{f,m}, ans:a, unit:'m/s²',
+     text:`قوة محصلة مقدارها <b>${f}</b> N تؤثر في جسم كتلته <b>${m}</b> kg. ما مقدار تسارع الجسم؟`,
+     steps:[`a = F ⁄ m`,`a = ${f} ⁄ ${m}`,`a = ${a} m/s²`]};
+  }
+ },
+ {
+  id:'friction_mu',
+  law:'معامل الاحتكاك الحركي:  μ = F ⁄ N   (وهنا N = الوزن)',
+  gen(){ const mu=r1(0.2,0.7); const N=rint(40,90); const F=Math.round(mu*N*10)/10; const ans=Math.round(F/N*100)/100;
+    return {vars:{F,N}, ans, unit:'',
+     text:`يُسحب جسم على رصيف بقوة أفقية مقدارها <b>${F}</b> N، والقوة العمودية (الوزن) <b>${N}</b> N، بسرعة ثابتة. ما معامل الاحتكاك الحركي؟`,
+     steps:[`μ = F ⁄ N`,`μ = ${F} ⁄ ${N}`,`μ = ${ans}`]};
+  }
+ },
+ {
+  id:'centripetal',
+  law:'التسارع المركزي:  a꜀ = v² ⁄ r',
+  gen(){ const v=rint(4,12); const r=rint(8,30); const ans=Math.round(v*v/r*100)/100;
+    return {vars:{v,r}, ans, unit:'m/s²',
+     text:`يسير متسابق بسرعة مقدارها <b>${v}</b> m/s في منعطف نصف قطره <b>${r}</b> m. ما مقدار التسارع المركزي؟`,
+     steps:[`a꜀ = v² ⁄ r`,`a꜀ = (${v})² ⁄ ${r}`,`a꜀ = ${v*v} ⁄ ${r}`,`a꜀ = ${ans} m/s²`]};
+  }
+ },
+ {
+  id:'relative_v',
+  law:'السرعة النسبية (نفس الاتجاه):  v = v₁ + v₂',
+  gen(){ const a=rint(10,18); const b=r1(1,4); const ans=Math.round((a+b)*10)/10;
+    return {vars:{a,b}, ans, unit:'m/s',
+     text:`تركبين قطاراً يتحرك بسرعة <b>${a}</b> m/s بالنسبة للأرض، وركضتِ في اتجاه مقدمة القطار بسرعة <b>${b}</b> m/s بالنسبة للقطار. فما سرعتك بالنسبة للأرض؟`,
+     steps:[`v = v₁ + v₂`,`v = ${a} + ${b}`,`v = ${ans} m/s`]};
+  }
+ },
+ {
+  id:'resultant_perp',
+  law:'محصلة متجهين متعامدين (فيثاغورس):  R = √(x² + y²)',
+  gen(){ const pairs=[[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15],[12,16,20]]; const p=pairs[rint(0,pairs.length-1)];
+    return {vars:{x:p[0],y:p[1]}, ans:p[2], unit:'km',
+     text:`قطعت سيارة <b>${p[0]}</b> km غرباً ثم <b>${p[1]}</b> km جنوباً. فما مقدار إزاحتها؟ (حلّيها بنظرية فيثاغورس)`,
+     steps:[`R = √(x² + y²)`,`R = √(${p[0]}² + ${p[1]}²)`,`R = √(${p[0]*p[0]} + ${p[1]*p[1]}) = √${p[0]*p[0]+p[1]*p[1]}`,`R = ${p[2]} km`]};
+  }
+ },
+];
+
+/* ============ TOPICS ============ */
+const TOPICS=[
+ {id:'defs', ico:'📖', title:'التعريفات', sub:'Definitions', kind:'defs', count:DEFS.length},
+ {id:'tf', ico:'✅', title:'صح أو خطأ', sub:'True / False', kind:'tf', count:TF.length},
+ {id:'why', ico:'💭', title:'علّلي', sub:'Reasoning', kind:'why', count:WHY.length},
+ {id:'match', ico:'🔗', title:'مزاوجة القوى', sub:'Match the Forces', kind:'match', count:MATCH.length},
+ {id:'calc', ico:'🧮', title:'المسائل الحسابية', sub:'Problems (random numbers)', kind:'calc', count:CALC.length},
+];
+
+/* ============ STATE ============ */
+const app=document.getElementById('app');
+const progress={};
+let cur=null, mode='', items=[], idx=0, score=0;
+
+function home(){
+  let cards='';
+  TOPICS.forEach(t=>{
+    const p=progress[t.id];
+    let badge='';
+    if(p!==undefined) badge=`<span class="badge ${p>=80?'done':'half'}">${p>=80?'ممتاز ✓':'كمّلي 💪'}</span>`;
+    cards+=`<div class="card" onclick="openTopic('${t.id}')">
+      <div class="ico">${t.ico}</div>
+      <h3>${t.title}</h3><div class="sub">${t.sub}</div>
+      <div class="meta"><span>${t.count} ${t.kind==='calc'?'مسألة':(t.kind==='defs'?'تعريف':'سؤال')}</span>${badge}</div>
+    </div>`;
+  });
+  app.innerHTML=`
+    <div class="sechead">💜 اختاري القسم اللي تبغين تذاكرينه</div>
+    <div class="grid">${cards}</div>
+    <div class="intro">الطريقة: حُلّي الاختيارات الأول عشان تثبت المعلومة، وبعدها اكتبيها من ذاكرتك ✍️<br>وفي المسائل الأرقام تتغير كل مرة عشان تتمرني أكثر 🌟</div>`;
+}
+
+const KINDS={defs:['flash','write'], tf:['quiz'], why:['flash','write'], match:['play'], calc:['solve']};
+function openTopic(id){
+  cur=TOPICS.find(t=>t.id===id);
+  mode=KINDS[cur.kind][0];
+  start();
+}
+function shell(inner){
+  const ms=KINDS[cur.kind];
+  const labels={flash:'تعرّفي ✨', write:'اكتبي ✍️', quiz:'اختاري', solve:'حُلّي 🧮', play:'زاوجي 🔗'};
+  let tabs='';
+  if(ms.length>1){
+    tabs=`<div class="tabs">${ms.map(m=>`<button class="tab ${mode===m?'active':''}" onclick="mode='${m}';start()">${labels[m]}</button>`).join('')}</div>`;
+  }
+  app.innerHTML=`
+    <button class="backbtn" onclick="home()">→ رجوع</button>
+    <h2 class="topic-title">${cur.ico} ${cur.title}</h2>
+    <div class="topic-sub en" style="text-align:right">${cur.sub}</div>
+    ${tabs}<div id="inner">${inner}</div>`;
+}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function start(){
+  if(cur.kind==='defs'){ items=shuffle(DEFS); mode==='flash'?flashDefs():writeDefs(); }
+  else if(cur.kind==='tf'){ items=shuffle(TF); idx=0; score=0; quizTF(); }
+  else if(cur.kind==='why'){ items=shuffle(WHY); mode==='flash'?flashWhy():writeWhy(); }
+  else if(cur.kind==='match'){ startMatch(); }
+  else if(cur.kind==='calc'){ items=shuffle(CALC); idx=0; score=0; solveCalc(); }
+}
+
+/* ---- DEFINITIONS: flashcards (reveal) ---- */
+function flashDefs(){
+  let h='<div class="hint">اقرئي كل تعريف زين. اضغطي "اعرضي التعريف" لو تبغين تتأكدين، وبعدها روحي لمرحلة الكتابة 💜</div>';
+  items.forEach((it,i)=>{
+    h+=`<div class="revealcard">
+      <div class="q">عرّفي: ${it.t}</div>
+      <button class="revealbtn" onclick="document.getElementById('da${i}').classList.toggle('show')">اعرضي التعريف 👀</button>
+      <div class="reveal-ans" id="da${i}">${it.d}</div>
+    </div>`;
+  });
+  h+=`<div class="actions"><button class="primary" onclick="mode='write';start()">اكتبيها من ذاكرتك ✍️</button></div>`;
+  shell(h);
+}
+/* ---- DEFINITIONS: write + self-check + keyword hint ---- */
+function norm(s){return (s||'').replace(/[أإآ]/g,'ا').replace(/[ةه]/g,'ه').replace(/[ىي]/g,'ي').replace(/[ؤئ]/g,'ء').replace(/[\u064B-\u0652]/g,'').replace(/[.،,:؛]/g,' ').replace(/\s+/g,' ').trim()}
+function kwHit(txt,it){const n=norm(txt);let h=0;it.kw.forEach(k=>{if(n.includes(norm(k)))h++});return {h,need:Math.ceil(it.kw.length/2)}}
+function writeDefs(){
+  let h='<div class="hint">اكتبي التعريف بكلماتك. مو لازم نفس النص حرفياً — المهم المعنى والكلمات الأساسية. بعدها اضغطي صححي.</div>';
+  items.forEach((it,i)=>{
+    h+=`<div class="revealcard">
+      <div class="q">عرّفي: ${it.t}</div>
+      <textarea id="dw${i}" rows="2" style="width:100%;margin-top:8px;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:10px;font-family:inherit;font-size:14px;color:var(--ink)" placeholder="اكتبي هنا..."></textarea>
+      <div class="reveal-ans" id="dwa${i}"></div>
+    </div>`;
+  });
+  h+=`<div class="actions"><button class="primary" onclick="checkDefs()">صححي لي ✓</button><button class="ghost" onclick="start()">مسح ↻</button></div><div id="res"></div>`;
+  shell(h);
+}
+function checkDefs(){
+  let score=0;
+  items.forEach((it,i)=>{
+    const val=document.getElementById('dw'+i).value;
+    const {h,need}=kwHit(val,it);
+    const ok = val.trim().length>0 && h>=need;
+    if(ok)score++;
+    const box=document.getElementById('dwa'+i);
+    box.className='reveal-ans show';
+    box.style.background = ok?'var(--good-bg)':'var(--bad-bg)';
+    box.style.borderColor = ok?'var(--good)':'var(--bad)';
+    box.innerHTML=`<b>${ok?'✅ ممتاز':'📖 التعريف الصحيح'}:</b> ${it.d}`;
+  });
+  finishMsg(score, items.length, 'res');
+}
+
+/* ---- WHY: flash + write (same pattern) ---- */
+function flashWhy(){
+  let h='<div class="hint">اقرئي السؤال وفكّري بالجواب، وبعدها اعرضيه للتأكد 💭</div>';
+  items.forEach((it,i)=>{
+    h+=`<div class="revealcard">
+      <div class="q">${it.q}</div>
+      <button class="revealbtn" onclick="document.getElementById('wa${i}').classList.toggle('show')">اعرضي الجواب 👀</button>
+      <div class="reveal-ans" id="wa${i}">${it.a}</div>
+    </div>`;
+  });
+  h+=`<div class="actions"><button class="primary" onclick="mode='write';start()">جاوبي من ذاكرتك ✍️</button></div>`;
+  shell(h);
+}
+function writeWhy(){
+  let h='<div class="hint">اكتبي تعليلك بكلماتك، وبعدها اعرضي الجواب وقيّمي نفسك بأمانة 🌟</div>';
+  items.forEach((it,i)=>{
+    h+=`<div class="revealcard">
+      <div class="q">${it.q}</div>
+      <textarea id="ww${i}" rows="2" style="width:100%;margin-top:8px;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:10px;font-family:inherit;font-size:14px;color:var(--ink)" placeholder="اكتبي تعليلك..."></textarea>
+      <button class="revealbtn" onclick="showWhy(${i})">اعرضي الجواب وقيّمي 👀</button>
+      <div class="reveal-ans" id="wwa${i}">${it.a}</div>
+      <div class="selfrow" id="ws${i}">
+        <button class="yes" onclick="markWhy(${i},true)">جوابي صح ✅</button>
+        <button class="no" onclick="markWhy(${i},false)">قريب/غلط ❌</button>
+      </div>
+    </div>`;
+  });
+  h+=`<div class="actions center"><button class="primary" onclick="home()">خلصت 🎉</button></div><div id="res"></div>`;
+  shell(h);
+  whyMarks={};
+}
+let whyMarks={};
+function showWhy(i){ document.getElementById('wwa'+i).classList.add('show'); document.getElementById('ws'+i).classList.add('show'); }
+function markWhy(i,ok){
+  whyMarks[i]=ok;
+  const row=document.getElementById('ws'+i);
+  [...row.children].forEach(b=>b.classList.remove('picked'));
+  row.children[ok?0:1].classList.add('picked');
+  const done=Object.keys(whyMarks).length;
+  if(done===items.length){
+    const sc=Object.values(whyMarks).filter(Boolean).length;
+    progress[cur.id]=Math.round(sc/items.length*100);
+    document.getElementById('res').innerHTML=`<div class="summary">قيّمتِ نفسك: <span class="num">${sc} / ${items.length}</span> <span class="star">✨</span></div>`;
+  }
+}
+
+/* ---- TRUE/FALSE quiz ---- */
+function quizTF(){
+  if(idx>=items.length){
+    const pct=Math.round(score/items.length*100);
+    progress[cur.id]=pct;
+    shell(`<div class="qbox scorebox">
+      <div class="big">${score}/${items.length}</div>
+      <p style="margin:12px 0 4px">${pct>=80?'ما شاء الله عليك! 🌟':'كمّلي وراجعي، بتضبط 💪'}</p>
+      <div class="actions center"><button class="primary" onclick="start()">إعادة ↻</button><button class="ghost" onclick="home()">رجوع</button></div>
+    </div>`);
+    return;
+  }
+  const q=items[idx];
+  shell(`
+    <div class="qcount">${idx+1} / ${items.length}</div>
+    <div class="qbox">
+      <div class="qtext">${q.s}</div>
+      <div class="tfrow" id="tf">
+        <button class="tf" onclick="ansTF(true)">صح ✓</button>
+        <button class="tf" onclick="ansTF(false)">خطأ ✗</button>
+      </div>
+      <div id="fb"></div>
+    </div>`);
+}
+function ansTF(choice){
+  const q=items[idx];
+  const btns=document.querySelectorAll('#tf .tf');
+  btns.forEach(b=>b.disabled=true);
+  const correctBtn = q.a ? btns[0] : btns[1];
+  const chosenBtn = choice ? btns[0] : btns[1];
+  const fb=document.getElementById('fb');
+  if(choice===q.a){ score++; chosenBtn.classList.add('sel-correct'); fb.innerHTML='<div class="fb good">✅ صح عليك!</div>'; }
+  else{ chosenBtn.classList.add('sel-wrong'); correctBtn.classList.add('sel-correct'); fb.innerHTML=`<div class="fb bad">❌ الإجابة الصحيحة: ${q.a?'صح':'خطأ'}${q.why?` — ${q.why}`:''}</div>`; }
+  fb.innerHTML+=`<button class="primary nextbtn" onclick="idx++;quizTF()">${idx+1>=items.length?'النتيجة 🎉':'التالي ←'}</button>`;
+}
+
+/* ---- MATCHING game (tap left then right) ---- */
+let mState=null;
+function startMatch(){
+  const lefts=shuffle(MATCH.map((m,i)=>({txt:m.left,id:i})));
+  const rights=shuffle(MATCH.map((m,i)=>({txt:m.right,id:i})));
+  mState={lefts,rights,sel:null,paired:{},done:false};
+  renderMatch();
+}
+function renderMatch(){
+  const m=mState;
+  const leftCol=m.lefts.map(l=>{
+    const pairedTo=m.paired[l.id];
+    let cls='mItem mLeft';
+    if(m.done){ cls+= (pairedTo===l.id)?' mOk':' mNo'; }
+    else if(pairedTo!==undefined) cls+=' mPaired';
+    else if(m.sel===l.id) cls+=' mSel';
+    const num=(pairedTo!==undefined)?`<span class="mTag">${m.rights.findIndex(r=>r.id===pairedTo)+1}</span>`:'';
+    return `<button class="${cls}" onclick="pickLeft(${l.id})" ${m.done?'disabled':''}>${num}${l.txt}</button>`;
+  }).join('');
+  const rightCol=m.rights.map((r,ri)=>{
+    const usedBy=Object.keys(m.paired).find(k=>m.paired[k]===r.id);
+    let cls='mItem mRight';
+    if(m.done){
+      // correct if the left that points here has same id
+      cls+= (usedBy!==undefined && Number(usedBy)===r.id)?' mOk':(usedBy!==undefined?' mNo':'');
+    } else if(usedBy!==undefined) cls+=' mPaired';
+    return `<button class="${cls}" onclick="pickRight(${r.id})" ${m.done?'disabled':''}><span class="mNum">${ri+1}</span>${r.txt}</button>`;
+  }).join('');
+  const allPaired=Object.keys(m.paired).length===MATCH.length;
+  shell(`
+    <div class="hint">اضغطي قوة من اليمين، ثم اضغطي تعريفها من اليسار. تقدرين تغيّرين بالضغط مرة ثانية. 🔗</div>
+    <div class="matchwrap">
+      <div class="mCol">${leftCol}</div>
+      <div class="mCol">${rightCol}</div>
+    </div>
+    <div class="actions center" style="margin-top:16px">
+      ${!m.done && allPaired?`<button class="primary" onclick="checkMatch()">صححي لي ✓</button>`:''}
+      <button class="ghost" onclick="startMatch()">إعادة ↻</button>
+    </div>
+    <div id="res"></div>`);
+}
+function pickLeft(id){
+  const m=mState; if(m.done) return;
+  // if this left already paired, un-pair it
+  if(m.paired[id]!==undefined){ delete m.paired[id]; renderMatch(); return; }
+  if(m.sel===null){ m.sel=id; }
+  else if(m.sel===id){ m.sel=null; }
+  else { m.sel=id; }
+  renderMatch();
+}
+function pickRight(rid){
+  const m=mState; if(m.done) return;
+  if(m.sel===null){ return; } // must pick a left first
+  // remove any existing pairing to this right
+  Object.keys(m.paired).forEach(k=>{ if(m.paired[k]===rid) delete m.paired[k]; });
+  m.paired[m.sel]=rid;
+  m.sel=null;
+  renderMatch();
+}
+function checkMatch(){
+  const m=mState; m.done=true;
+  let score=0;
+  Object.keys(m.paired).forEach(k=>{ if(m.paired[k]===Number(k)) score++; });
+  renderMatch();
+  const pct=Math.round(score/MATCH.length*100);
+  progress[cur.id]=pct;
+  document.getElementById('res').innerHTML=`<div class="summary">النتيجة: <span class="num">${score} / ${MATCH.length}</span> — ${pct===100?'ما شاء الله، كلها صح! 🌟':'الأخضر صح والأحمر غلط، أعيديها 💪'}</div>
+    <div class="actions center"><button class="primary" onclick="startMatch()">إعادة ↻</button></div>`;
+}
+
+/* ---- CALC solve (random numbers, auto-grade) ---- */
+let curProblem=null;
+function solveCalc(){
+  if(idx>=items.length){
+    const pct=Math.round(score/items.length*100);
+    progress[cur.id]=pct;
+    shell(`<div class="qbox scorebox">
+      <div class="big">${score}/${items.length}</div>
+      <p style="margin:12px 0 4px">${pct>=80?'حسابك ممتاز! 🧮🌟':'راجعي القوانين وحاولي مرة ثانية 💪'}</p>
+      <div class="actions center"><button class="primary" onclick="start()">مسائل جديدة ↻</button><button class="ghost" onclick="home()">رجوع</button></div>
+    </div>`);
+    return;
+  }
+  curProblem=items[idx].gen();
+  const law=items[idx].law;
+  shell(`
+    <div class="qcount">مسألة ${idx+1} / ${items.length}</div>
+    <div class="qbox">
+      <div class="problem">${curProblem.text}</div>
+      <div class="lawbox">📐 القانون: <span class="en">${law}</span></div>
+      <div class="answerrow">
+        <label>الجواب =</label>
+        <input id="ca" type="text" inputmode="decimal" placeholder="..." autocomplete="off">
+        <span class="unit">${curProblem.unit||''}</span>
+      </div>
+      <div class="actions"><button class="primary" onclick="checkCalc()">تأكدي ✓</button><button class="ghost" onclick="skipCalc()">مسألة ثانية ↻</button></div>
+      <div class="solution" id="sol"></div>
+    </div>`);
+  setTimeout(()=>document.getElementById('ca').focus(),50);
+}
+function skipCalc(){ solveCalc(); }
+function checkCalc(){
+  const raw=document.getElementById('ca').value.trim().replace(',', '.');
+  const val=parseFloat(raw);
+  const sol=document.getElementById('sol');
+  const target=curProblem.ans;
+  const tol=Math.max(0.05, Math.abs(target)*0.01); // 1% tolerance
+  const ok = !isNaN(val) && Math.abs(val-target)<=tol;
+  document.getElementById('ca').disabled=true;
+  if(ok) score++;
+  sol.className='solution show '+(ok?'ok':'no');
+  sol.innerHTML=`<b>${ok?'✅ إجابة صحيحة!':'❌ غير صحيحة. الإجابة الصحيحة: '+target+' '+(curProblem.unit||'')}</b>
+    <div style="margin-top:8px;font-size:13px;color:var(--muted)">طريقة الحل:</div>
+    ${curProblem.steps.map(s=>`<div class="step">${s}</div>`).join('')}
+    <button class="primary nextbtn" onclick="idx++;solveCalc()">${idx+1>=items.length?'النتيجة 🎉':'المسألة الجاية ←'}</button>`;
+}
+
+/* ---- shared finish message (defs write) ---- */
+function finishMsg(score,total,where){
+  const pct=Math.round(score/total*100);
+  progress[cur.id]=pct;
+  const msg = pct>=80?'ما شاء الله، حفظك ممتاز! 🌟' : pct>=50?'حلو، راجعي اللي فاتك وكرري 💪' : 'لا تستعجلين، ارجعي للتعريفات وكرري 💜';
+  document.getElementById(where).innerHTML=`<div class="summary">النتيجة: <span class="num">${score} / ${total}</span> — ${msg}</div>
+    <div class="actions center"><button class="ghost" onclick="start()">حاولي مرة ثانية ↻</button></div>`;
+  document.getElementById(where).scrollIntoView({behavior:'smooth'});
+}
+
+home();
+</script>
+</body>
+</html>
